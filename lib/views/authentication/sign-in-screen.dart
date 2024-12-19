@@ -3,6 +3,7 @@ import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/normal-text-widget.dart';
+import 'package:todo/views/home/home-screen.dart';
 
 import '../../controller/constants/app-images/app-images.dart';
 import '../../controller/widgets/image-widget.dart';
@@ -26,10 +27,10 @@ class _SignInScreenState extends State<SignInScreen> {
         backgroundColor: AppColors.backgroundColor,
         body : Column(
           children: [
-            SizedBox(height: 90,),
+            SizedBox(height: 160,),
             BlackTextHeading(text: 'Welcome Back!'),
             SizedBox(height: 20,),
-            ImageWidget(image: AppImages.splashImg),
+            ImageWidget(image: AppImages.loginImg),
             SizedBox(height: 24,),
 
             TextFieldWidget(hintText : 'Enter Your Email Address' , controller: emailController),
@@ -38,7 +39,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
             SizedBox(height: 40,),
             ButtonWidget(text: 'Sign In', ontap: (){
-              Navigator.push(context , MaterialPageRoute(builder: (context) => SignInScreen()));
+              Navigator.push(context , MaterialPageRoute(builder: (context) => HomeScreen()));
             }),
             SizedBox(height: 14,),
 

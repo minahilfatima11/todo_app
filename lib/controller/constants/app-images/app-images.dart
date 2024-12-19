@@ -5,4 +5,5 @@ class AppImages{
   //when we use static ... without creating object we can call this ....
   static String splashImg = 'assets/splashimg.png';
   static String loginImg = 'assets/loginimg.png';
+  static String HomeImg = 'assets/homeimg.png';
 }

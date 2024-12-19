@@ -6,9 +6,10 @@ import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/image-widget.dart';
 
 import '../../../controller/widgets/blacktext-heading-widget.dart';
+import '../../../controller/widgets/circular-container-left-widget.dart';
+import '../../../controller/widgets/circular-container-top-widget.dart';
 import '../../../controller/widgets/greytext-paragraph-widget.dart';
 import '../../authentication/signup-screen.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,25 +24,34 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
-        child:
-        Column(
+        child: Column(
           children: [
-            SizedBox(height: 70,),
+            SizedBox(
+              height: 160,
+            ),
             ImageWidget(image: AppImages.splashImg),
-          SizedBox(height: 30,),
-        BlackTextHeading(text: 'Things To Do With TODO'),
-            SizedBox(height: 30,),
-            GreyTextParagraph(text: 'Stay organized and productive with your personal To-Do List app. Plan, prioritize, and achieve your goals effortlessly!'),
-            SizedBox(height: 30,),
-            ButtonWidget(text: 'Get Started', ontap: (){
-              Navigator.push(context , MaterialPageRoute(builder: (context) => SignupScreen()));
-            }),
+            SizedBox(
+              height: 30,
+            ),
+            BlackTextHeading(text: 'Things To Do With TODO'),
+            SizedBox(
+              height: 30,
+            ),
+            GreyTextParagraph(
+                text:
+                    'Stay organized and productive with your personal To-Do List app. Plan, prioritize, and achieve your goals effortlessly!'),
+            SizedBox(
+              height: 30,
+            ),
+            ButtonWidget(
+                text: 'Get Started',
+                ontap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignupScreen()));
+                }),
           ],
         ),
-
       ),
-
-
     );
   }
 }
