@@ -6,8 +6,8 @@ class CircularContainerLeft extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Positioned(
-      top: -5,
-      left: -16,
+      top: -10,
+      left: -28,
       child: Container(
         height: 180,
         width: 90,
