@@ -6,6 +6,7 @@ import 'package:todo/controller/widgets/normal-text-widget.dart';
 import 'package:todo/views/home/home-screen.dart';
 
 import '../../controller/constants/app-images/app-images.dart';
+import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
 import '../../controller/widgets/image-widget.dart';
@@ -31,6 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
           children: [
             CircularContainerTop(),
             CircularContainerLeft(),
+            BackArrowWidget(),
             Column(
               children: [
                 SizedBox(height: 160,),

@@ -5,6 +5,7 @@ import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/normal-text-widget.dart';
 import 'package:todo/views/authentication/sign-in-screen.dart';
 
+import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
 import '../../controller/widgets/text-field-widget.dart';
@@ -29,6 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
         children: [
           CircularContainerTop(),
           CircularContainerLeft(),
+          BackArrowWidget(),
           Column(
             children: [
               SizedBox(height: 120,),
