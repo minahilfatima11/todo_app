@@ -7,7 +7,7 @@ class ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image(image: AssetImage(image),
-      height: 220,
+      height: 230,
     );
 
 

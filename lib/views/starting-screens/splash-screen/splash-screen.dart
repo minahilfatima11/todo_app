@@ -32,11 +32,11 @@ class _SplashScreenState extends State<SplashScreen> {
             Column(
               children: [
                 SizedBox(
-                  height: 160,
+                  height: 130,
                 ),
-                ImageWidget(image: AppImages.splashImg),
+                ImageWidget(image: AppImages.splashImg1),
                 SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
                 BlackTextHeading(text: 'Things To Do With TODO'),
                 SizedBox(
