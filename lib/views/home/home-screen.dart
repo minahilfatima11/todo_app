@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(28),
-              color: AppColors.primarycolor.withOpacity(0.2),
+              color: AppColors.whiteColor,
             ),
           ),
         ),

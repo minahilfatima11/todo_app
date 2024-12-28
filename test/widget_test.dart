@@ -13,8 +13,8 @@ import 'package:todo/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
+    await tester.pumpWidget(MyApp());
+    flutterfire configure --project=todo-list-51c1b
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);

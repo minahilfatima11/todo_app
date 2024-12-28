@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
@@ -44,8 +45,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
               TextFieldWidget(hintText : 'Confirm Your Password' , controller: confirmpasswordController),
               SizedBox(height: 40,),
-              ButtonWidget(text: 'SignUp', ontap: (){
-                Navigator.push(context , MaterialPageRoute(builder: (context) => SignInScreen()));
+              ButtonWidget(text: 'SignUp', ontap: ()async {
+                //irebaseauth is class
+                //instance--- pkg class usage so thats why we tell --as like obj
+                await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text);
+
 
               }),
               SizedBox(height: 14,),

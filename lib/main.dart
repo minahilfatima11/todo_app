@@ -1,26 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:todo/views/starting-screens/splash-screen/splash-screen.dart';
 
+void main()  async {
+  //connecting
+  WidgetsFlutterBinding.ensureInitialized();
 
-//get used for
-//it is state management and its architecture and for code shortage --
-//1st usage --- used for navigations ...Get.to(()=> FbScreen())
-
-
-void main() {
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: //Container()
-      SplashScreen()
+    return MaterialApp(
+      home: SplashScreen()
 
     );
   }
