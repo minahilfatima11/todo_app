@@ -71,7 +71,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     height: 40,
                   ),
                  isLoading? SpinKitWaveSpinner(
-                   duration: const Duration(seconds: 18),
+                   duration: const Duration(seconds: 3),
 
                    color: AppColors.primarycolor,
 
