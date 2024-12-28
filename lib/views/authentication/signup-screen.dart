@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
@@ -95,6 +97,22 @@ class _SignupScreenState extends State<SignupScreen> {
                         setState(() {
 
                         });
+                        Get.snackbar(
+                          icon: const Icon(Icons.error_outline, color: Colors.white),
+                          'Error',
+                          titleText: const Text(
+                            'Error',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          duration: const Duration(seconds: 5),
+                          '${value.toString()}',
+                          colorText: Colors.white,
+                          backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+                        );
                       });
                       }),
                   SizedBox(
