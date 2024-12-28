@@ -28,32 +28,34 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backgroundColor,
-        body : Stack(
-          children: [
-            CircularContainerTop(),
-            CircularContainerLeft(),
-            BackArrowWidget(),
-            Column(
-              children: [
-                SizedBox(height: 160,),
-                BlackTextHeading(text: 'Welcome Back!'),
-                SizedBox(height: 20,),
-                ImageWidget(image: AppImages.loginImg),
-                SizedBox(height: 24,),
-
-                TextFieldWidget(hintText : 'Enter Your Email Address' , controller: emailController),
-                TextFieldWidget(hintText : 'Enter Your Password' , controller: passwordController),
-
-
-                SizedBox(height: 40,),
-                ButtonWidget(text: 'Sign In', ontap: (){
-                  Navigator.push(context , MaterialPageRoute(builder: (context) => HomeScreen()));
-                }),
-                SizedBox(height: 14,),
-
-              ],
-            ),
-          ],
+        body : SingleChildScrollView(
+          child: Stack(
+            children: [
+              CircularContainerTop(),
+              CircularContainerLeft(),
+              BackArrowWidget(),
+              Column(
+                children: [
+                  SizedBox(height: 160,),
+                  BlackTextHeading(text: 'Welcome Back!'),
+                  SizedBox(height: 20,),
+                  ImageWidget(image: AppImages.loginImg),
+                  SizedBox(height: 24,),
+          
+                  TextFieldWidget(hintText : 'Enter Your Email Address' , controller: emailController),
+                  TextFieldWidget(hintText : 'Enter Your Password' , controller: passwordController),
+          
+          
+                  SizedBox(height: 40,),
+                  ButtonWidget(text: 'Sign In', ontap: (){
+                    Navigator.push(context , MaterialPageRoute(builder: (context) => HomeScreen()));
+                  }),
+                  SizedBox(height: 14,),
+          
+                ],
+              ),
+            ],
+          ),
         )
     );
   }

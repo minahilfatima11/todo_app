@@ -70,8 +70,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   SizedBox(
                     height: 40,
                   ),
-                 isLoading? SpinKitChasingDots(
+                 isLoading? SpinKitWaveSpinner(
+                   duration: const Duration(seconds: 18),
+
                    color: AppColors.primarycolor,
+
                  ) : ButtonWidget(
                       text: 'SignUp',
                       ontap: () async {
