@@ -45,11 +45,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 ImageWidget(image: AppImages.loginImg),
                 SizedBox(height: 24),
                 TextFieldWidget(
-                    hintText: 'Enter Your Email Address',
-                    controller: emailController),
+                  hintText: 'Enter Your Email Address',
+                  controller: emailController,
+                ),
                 TextFieldWidget(
-                    hintText: 'Enter Your Password',
-                    controller: passwordController),
+                  hintText: 'Enter Your Password',
+                  controller: passwordController,
+                ),
                 SizedBox(height: 40),
                 isLoading
                     ? SpinKitWaveSpinner(
@@ -63,16 +65,22 @@ class _SignInScreenState extends State<SignInScreen> {
                     setState(() {});
                     await FirebaseAuth.instance
                         .signInWithEmailAndPassword(
-                        email: emailController.text.trim(),
-                        password: passwordController.text)
+                      email: emailController.text.trim(),
+                      password: passwordController.text,
+                    )
                         .then((value) {
                       isLoading = false;
                       setState(() {
                         Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                                builder: (context) => HomeScreen()));
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                        );
                       });
+                    }).onError((error, stackTrace) {
+                      isLoading = false;
+                      setState(() {});
                     });
                   },
                 ),
