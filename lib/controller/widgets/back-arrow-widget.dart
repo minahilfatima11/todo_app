@@ -9,14 +9,14 @@ class BackArrowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 0.0 , top:20.0),
+      padding: const EdgeInsets.only(left: 0.0, top: 20.0),
       child: InkWell(
-        onTap: (){
+        onTap: () {
           Navigator.pop(context);
         },
-
-        child: ImageIcon(AssetImage(AppIcons.backArrowIcon),
-          size : 80,
+        child: ImageIcon(
+          AssetImage(AppIcons.backArrowIcon),
+          size: 80,
           color: AppColors.whiteColor,
         ),
       ),

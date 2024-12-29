@@ -9,8 +9,8 @@ class AppLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return isLoading
         ? Center(
-      child: CircularProgressIndicator(), // Loader widget
-    )
+            child: CircularProgressIndicator(), // Loader widget
+          )
         : Container(); // Empty container when not loading
   }
 }
