@@ -21,9 +21,5 @@ class CircularContainerTop extends StatelessWidget {
             )),
       ),
     );
-
-
-
-
   }
 }
