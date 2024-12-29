@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/views/starting-screens/splash-screen/splash-screen.dart';
 
-void main()  async {
+void main() async {
   //connecting
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -15,11 +15,7 @@ void main()  async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-      home: SplashScreen()
-
-    );
+        debugShowCheckedModeBanner: false, home: SplashScreen());
   }
 }
