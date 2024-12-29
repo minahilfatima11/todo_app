@@ -56,59 +56,59 @@ class _SignInScreenState extends State<SignInScreen> {
                 SizedBox(height: 40),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: const Duration(seconds: 3),
-                  color: AppColors.primarycolor,
-                )
-                    : ButtonWidget(
-                  text: 'Sign In',
-                  ontap: () async {
-                    setState(() {
-                      isLoading = true;
-                    });
-                    try {
-                      await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                        email: emailController.text.trim(),
-                        password: passwordController.text,
+                        duration: const Duration(seconds: 3),
+                        color: AppColors.primarycolor,
                       )
-                          .then((value) {
-                        setState(() {
-                          isLoading = false;
-                        });
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => HomeScreen(),
-                          ),
-                        );
-                      });
-                    } catch (e) {
-                      setState(() {
-                        isLoading = false;
-                      });
-                      Get.snackbar(
-                        icon: const Icon(
-                          Icons.error_outline,
-                          color: Colors.white,
-                        ),
-                        'Error',
-                        titleText: const Text(
-                          'Error',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        duration: const Duration(seconds: 5),
-                        e.toString(),
-                        colorText: Colors.white,
-                        backgroundColor:
-                        AppColors.primarycolor.withOpacity(0.5),
-                      );
-                    }
-                  },
-                ),
+                    : ButtonWidget(
+                        text: 'Sign In',
+                        ontap: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          try {
+                            await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                              email: emailController.text.trim(),
+                              password: passwordController.text,
+                            )
+                                .then((value) {
+                              setState(() {
+                                isLoading = false;
+                              });
+                              Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ),
+                              );
+                            });
+                          } catch (e) {
+                            setState(() {
+                              isLoading = false;
+                            });
+                            Get.snackbar(
+                              icon: const Icon(
+                                Icons.error_outline,
+                                color: Colors.white,
+                              ),
+                              'Error',
+                              titleText: const Text(
+                                'Error',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              duration: const Duration(seconds: 5),
+                              e.toString(),
+                              colorText: Colors.white,
+                              backgroundColor:
+                                  AppColors.primarycolor.withOpacity(0.5),
+                            );
+                          }
+                        },
+                      ),
                 SizedBox(height: 14),
               ],
             ),
