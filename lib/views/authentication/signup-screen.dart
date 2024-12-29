@@ -70,54 +70,56 @@ class _SignupScreenState extends State<SignupScreen> {
                   SizedBox(
                     height: 40,
                   ),
-                 isLoading? SpinKitWaveSpinner(
-                   duration: const Duration(seconds: 3),
+                  isLoading
+                      ? SpinKitWaveSpinner(
+                          duration: const Duration(seconds: 3),
+                          color: AppColors.primarycolor,
+                        )
+                      : ButtonWidget(
+                          text: 'SignUp',
+                          ontap: () async {
+                            isLoading = true;
 
-                   color: AppColors.primarycolor,
-
-                 ) : ButtonWidget(
-                      text: 'SignUp',
-                      ontap: () async {
-                        isLoading = true;
-          
-                        setState((){
-                          //isLoading = false;
-                        });
-                        //firebase auth is class
-                        //instance--- pkg class usage so thats why we tell --as like obj
-                        await FirebaseAuth.instance
-                            .createUserWithEmailAndPassword(
-                                email: emailController.text.trim(),
-                                password: passwordController.text)
-                        .then((value){
-                        isLoading = false;
-                        setState(() {
-                        Navigator.push(context , CupertinoPageRoute(builder: (context)=>SignInScreen()));
-                        });
-                        
-                      }).onError((value , error){
-                        isLoading = false;
-                        setState(() {
-
-                        });
-                        Get.snackbar(
-                          icon: const Icon(Icons.error_outline, color: Colors.white),
-                          'Error',
-                          titleText: const Text(
-                            'Error',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          duration: const Duration(seconds: 5),
-                          '${value.toString()}',
-                          colorText: Colors.white,
-                          backgroundColor: AppColors.primarycolor.withOpacity(0.5),
-                        );
-                      });
-                      }),
+                            setState(() {
+                              //isLoading = false;
+                            });
+                            //firebase auth is class
+                            //instance--- pkg class usage so thats why we tell --as like obj
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text)
+                                .then((value) {
+                              isLoading = false;
+                              setState(() {
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(
+                                        builder: (context) => SignInScreen()));
+                              });
+                            }).onError((value, error) {
+                              isLoading = false;
+                              setState(() {});
+                              Get.snackbar(
+                                icon: const Icon(Icons.error_outline,
+                                    color: Colors.white),
+                                'Error',
+                                titleText: const Text(
+                                  'Error',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                duration: const Duration(seconds: 5),
+                                '${value.toString()}',
+                                colorText: Colors.white,
+                                backgroundColor:
+                                    AppColors.primarycolor.withOpacity(0.5),
+                              );
+                            });
+                          }),
                   SizedBox(
                     height: 14,
                   ),
