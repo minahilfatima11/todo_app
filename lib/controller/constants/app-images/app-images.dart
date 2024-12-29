@@ -1,4 +1,4 @@
-class AppImages{
+class AppImages {
   //splashImg is variable name
   //not changable
   //these all are data members---through which we can easily access
