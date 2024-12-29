@@ -29,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 300,
                 width: double.infinity,
                 color: AppColors.primarycolor,
-              )
+              ),
+              
             ],
           ),
           CircularContainerTop(),

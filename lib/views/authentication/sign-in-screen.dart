@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
@@ -23,7 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,10 +45,25 @@ class _SignInScreenState extends State<SignInScreen> {
           
                   TextFieldWidget(hintText : 'Enter Your Email Address' , controller: emailController),
                   TextFieldWidget(hintText : 'Enter Your Password' , controller: passwordController),
-          
+
           
                   SizedBox(height: 40,),
-                  ButtonWidget(text: 'Sign In', ontap: (){
+                  isLoading ? SpinKitWaveSpinner(
+                    duration: const Duration(seconds: 3),
+
+                    color: AppColors.primarycolor,
+
+                  ) :
+
+                  ButtonWidget(text: 'Sign In', ontap:()
+                   async
+                  {
+                    isLoading = true;
+
+                    setState((){
+                      //isLoading = false;
+                    });
+
                     Navigator.push(context , MaterialPageRoute(builder: (context) => HomeScreen()));
                   }),
                   SizedBox(height: 14,),
