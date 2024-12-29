@@ -25,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: Stack(
-
           children: [
             CircularContainerTop(),
             CircularContainerLeft(),
@@ -51,8 +50,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 ButtonWidget(
                     text: 'Get Started',
                     ontap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignupScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignupScreen()));
                     }),
               ],
             ),
