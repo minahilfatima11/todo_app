@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/constants/app-images/app-images.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/image-widget.dart';
+import 'package:todo/views/home/home-screen.dart';
 
 import '../../../controller/widgets/blacktext-heading-widget.dart';
 import '../../../controller/widgets/circular-container-left-widget.dart';
@@ -49,11 +51,26 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 ButtonWidget(
                     text: 'Get Started',
-                    ontap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SignupScreen()));
+                    ontap:  () async{
+                     //current user ---datatype is User
+                     //? it is null check or can be called as empty
+                    User? check = await FirebaseAuth.instance.currentUser;
+
+                    if(check == null)
+                      {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignupScreen()));
+                      }
+                    else
+                      {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                      }
+
                     }),
               ],
             ),
