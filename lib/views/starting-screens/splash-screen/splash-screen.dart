@@ -22,21 +22,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // Function to check if the user is logged in
   Future<void> isloggedin() async {
-    // Retrieve the current user
+    await Future.delayed(const Duration(seconds: 3));
     User? check = FirebaseAuth.instance.currentUser;
 
-    // Navigate based on the user status
     if (check == null) {
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
-        CupertinoPageRoute(builder: (context) =>  SignupScreen()),
+        MaterialPageRoute(builder: (context) =>  SignupScreen()),
       );
     } else {
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
-        CupertinoPageRoute(builder: (context) =>  HomeScreen()),
+        MaterialPageRoute(builder: (context) =>  HomeScreen()),
       );
     }
   }
@@ -44,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Call the function to check user status on initialization
     isloggedin();
   }
 
@@ -64,16 +61,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(height: 50),
                 BlackTextHeading(text: 'Things To Do With TODO'),
                 const SizedBox(height: 30),
-                 GreyTextParagraph(
+                GreyTextParagraph(
                   text:
                   'Stay organized and productive with your personal To-Do List app. Plan, prioritize, and achieve your goals effortlessly!',
                 ),
                 const SizedBox(height: 30),
                 ButtonWidget(
                   text: 'Get Started',
-                  ontap: () {
-                    // You can add specific navigation or functionality here
-                  },
+                  ontap: () {},
                 ),
               ],
             ),

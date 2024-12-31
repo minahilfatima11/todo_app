@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/controller/widgets/circular-container-top-widget.dart';
+import 'package:todo/controller/widgets/log-out-widget.dart';
 
 import '../../controller/constants/app-colors/app-colors.dart';
 import '../../controller/constants/app-images/app-images.dart';
@@ -104,7 +105,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           CircularContainerTop(),
           CircularContainerLeft(),
-          BackArrowWidget(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              BackArrowWidget(),
+              LogOutWidget(),
+            ],
+          ),
           Positioned(
               top: 80, left: 80, child: ImageWidget(image: AppImages.HomeImg)),
         ],
