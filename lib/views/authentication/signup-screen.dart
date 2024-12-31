@@ -37,7 +37,7 @@ class _SignupScreenState extends State<SignupScreen> {
             children: [
               CircularContainerTop(),
               CircularContainerLeft(),
-              BackArrowWidget(),
+
               Column(
                 children: [
                   SizedBox(
