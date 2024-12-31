@@ -21,6 +21,32 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  // Function to check if the user is logged in
+  Future<void> isloggedin() async {
+    // Retrieve the current user
+    User? check = FirebaseAuth.instance.currentUser;
+
+    // Navigate based on the user status
+    if (check == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  SignupScreen()),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) =>  HomeScreen()),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Call the function to check user status on initialization
+    isloggedin();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,50 +54,26 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Stack(
           children: [
-            CircularContainerTop(),
-            CircularContainerLeft(),
+            const CircularContainerTop(),
+            const CircularContainerLeft(),
             Column(
               children: [
-                SizedBox(
-                  height: 130,
-                ),
+                const SizedBox(height: 130),
                 ImageWidget(image: AppImages.splashImg1),
-                SizedBox(
-                  height: 50,
-                ),
+                const SizedBox(height: 50),
                 BlackTextHeading(text: 'Things To Do With TODO'),
-                SizedBox(
-                  height: 30,
+                const SizedBox(height: 30),
+                 GreyTextParagraph(
+                  text:
+                  'Stay organized and productive with your personal To-Do List app. Plan, prioritize, and achieve your goals effortlessly!',
                 ),
-                GreyTextParagraph(
-                    text:
-                        'Stay organized and productive with your personal To-Do List app. Plan, prioritize, and achieve your goals effortlessly!'),
-                SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 ButtonWidget(
-                    text: 'Get Started',
-                    ontap:  () async{
-                     //current user ---datatype is User
-                     //? it is null check or can be called as empty
-                    User? check = await FirebaseAuth.instance.currentUser;
-
-                    if(check == null)
-                      {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignupScreen()));
-                      }
-                    else
-                      {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
-                      }
-
-                    }),
+                  text: 'Get Started',
+                  ontap: () {
+                    // You can add specific navigation or functionality here
+                  },
+                ),
               ],
             ),
           ],
