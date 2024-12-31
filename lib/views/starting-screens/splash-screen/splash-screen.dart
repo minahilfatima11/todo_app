@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/controller/constants/app-colors/app-colors.dart';
@@ -28,14 +29,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // Navigate based on the user status
     if (check == null) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  SignupScreen()),
+        CupertinoPageRoute(builder: (context) =>  SignupScreen()),
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  HomeScreen()),
+        CupertinoPageRoute(builder: (context) =>  HomeScreen()),
       );
     }
   }
