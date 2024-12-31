@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/controller/widgets/circular-container-top-widget.dart';
 import 'package:todo/controller/widgets/log-out-widget.dart';
-
 import '../../controller/constants/app-colors/app-colors.dart';
 import '../../controller/constants/app-images/app-images.dart';
 import '../../controller/widgets/back-arrow-widget.dart';
@@ -19,103 +18,110 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Stack(
-        children: [
-          Column(
-            children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                color: AppColors.primarycolor,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text('TODO LIST..!',
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  height: 300,
+                  width: double.infinity,
+                  color: AppColors.primarycolor,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'TODO LIST..!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 26,
                     color: AppColors.primarycolor,
-                  )),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 280,
-                width: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: AppColors.primarycolor.withOpacity(0.4),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  height: 280,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: AppColors.primarycolor.withOpacity(0.4),
+                  ),
+                ),
+                const SizedBox(height: 80),
+              ],
+            ),
+            const CircularContainerTop(),
+            const CircularContainerLeft(),
+            Padding(
+              padding: const EdgeInsets.only(top: 730, left: 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  height: 80,
+                  width: 140,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff6a6395).withOpacity(0.3),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(220),
+                      topLeft: Radius.circular(220),
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 80,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 730, left: 116),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  height: 80,
+                  width: 140,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff6a6395).withOpacity(0.3),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(220),
+                      topLeft: Radius.circular(220),
+                    ),
+                  ),
+                ),
               ),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 730, right: 0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: 80,
+                  width: 140,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff6a6395).withOpacity(0.3),
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(220),
+                      topLeft: Radius.circular(220),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Positioned(
-                    top: 520,
-                    left: -102,
-                    child: Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Color(0xff6a6395).withOpacity(0.3),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(220),
-                              //bottomLeft: Radius.circular(220),
-                              //bottomRight: Radius.circular(220),
-                              topLeft: Radius.circular(220))),
-                    ),
-                  ),
-                  Positioned(
-                    top: 720,
-                    left: 66,
-                    child: Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Color(0xff6a6395).withOpacity(0.3),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(220),
-                              //bottomLeft: Radius.circular(220),
-                              //bottomRight: Radius.circular(220),
-                              topLeft: Radius.circular(220))),
-                    ),
-                  ),
-                  Positioned(
-                    top: 720,
-                    right: -18,
-                    child: Container(
-                      height: 80,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Color(0xff6a6395).withOpacity(0.3),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(220),
-                              //bottomLeft: Radius.circular(220),
-                              //bottomRight: Radius.circular(220),
-                              topLeft: Radius.circular(220))),
-                    ),
-                  ),
+                  const BackArrowWidget(),
+                  const LogOutWidget(),
                 ],
-              )
-            ],
-          ),
-          CircularContainerTop(),
-          CircularContainerLeft(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              BackArrowWidget(),
-              LogOutWidget(),
-            ],
-          ),
-          Positioned(
-              top: 80, left: 80, child: ImageWidget(image: AppImages.HomeImg)),
-        ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 70, left: 50),
+              child: Align(
+                alignment: Alignment.center,
+                child: ImageWidget(image: AppImages.HomeImg),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

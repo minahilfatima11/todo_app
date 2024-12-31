@@ -22,17 +22,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  Future<void> isloggedin() async {
+    isloggedin() async {
     await Future.delayed(const Duration(seconds: 3));
     User? check = FirebaseAuth.instance.currentUser;
 
     if (check == null) {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) =>  SignupScreen()),
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) =>  HomeScreen()),
       );
