@@ -14,6 +14,7 @@ import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
 import '../../controller/widgets/image-widget.dart';
+import '../../controller/widgets/password-field.dart';
 import '../../controller/widgets/text-field-widget.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   hintText: 'Enter Your Email Address',
                   controller: emailController,
                 ),
-                TextFieldWidget(
+                PasswordFieldWidget(
                   hintText: 'Enter Your Password',
                   controller: passwordController,
                 ),

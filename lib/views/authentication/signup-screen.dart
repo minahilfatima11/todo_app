@@ -12,6 +12,7 @@ import 'package:todo/views/authentication/sign-in-screen.dart';
 import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
+import '../../controller/widgets/password-field.dart';
 import '../../controller/widgets/text-field-widget.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -60,10 +61,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextFieldWidget(
                       hintText: 'Enter Your Email Address',
                       controller: emailController),
-                  TextFieldWidget(
+                  PasswordFieldWidget(
                       hintText: 'Create Password',
                       controller: passwordController),
-                  TextFieldWidget(
+                  PasswordFieldWidget(
                       hintText: 'Confirm Your Password',
                       controller: confirmpasswordController),
                   SizedBox(
