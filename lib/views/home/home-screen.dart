@@ -8,6 +8,7 @@ import '../../controller/constants/app-images/app-images.dart';
 import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/image-widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
           const end = Offset.zero; // Move to the center
           const curve = Curves.easeInOut;
 
-          final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final tween =
+          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           final offsetAnimation = animation.drive(tween);
 
           return SlideTransition(
@@ -69,73 +71,101 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(18),
                     color: AppColors.backgroundColor.withOpacity(0.4),
                   ),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('todos') // Replace with your collection name
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Center(
+                            child: CircularProgressIndicator());
+                      }
+                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                        return const Center(
+                            child: Text('No Data Available'));
+                      }
+                      final todos = snapshot.data!.docs;
+
+                      return ListView.builder(
+                        itemCount: todos.length,
+                        itemBuilder: (context, index) {
+                          final todo = todos[index];
+                          final title = todo['title'] ?? '';
+                          final description = todo['description'] ?? '';
+                          return Card(
+                            elevation: 3,
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
+                            child: ListTile(
+                              title: Text(
+                                title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primarycolor,
+                                ),
+                              ),
+                              subtitle: Text(
+                                description,
+                                style: const TextStyle(
+                                  color: Colors.grey, // Light grey color
+                                ),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // Edit Icon
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Handle Edit functionality
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primarycolor,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  // Delete Icon
+                                  GestureDetector(
+                                    onTap: () {
+                                      FirebaseFirestore.instance
+                                          .collection('todos')
+                                          .doc(todo.id)
+                                          .delete();
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      decoration: BoxDecoration(
+                                        color: Colors.redAccent,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox(height: 80),
               ],
             ),
             const CircularContainerTop(),
             const CircularContainerLeft(),
-           /* Padding(
-              padding: const EdgeInsets.only(top: 730, left: 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 80,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff6a6395).withOpacity(0.3),
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(220),
-                      topLeft: Radius.circular(220),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            /*Padding(
-              padding: const EdgeInsets.only(top: 730, left: 116),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  height: 80,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff6a6395).withOpacity(0.3),
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(220),
-                      topLeft: Radius.circular(220),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 730, right: 0),
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  height: 80,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff6a6395).withOpacity(0.3),
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(220),
-                      topLeft: Radius.circular(220),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const BackArrowWidget(),
-                  const LogOutWidget(),
-                ],
-              ),
-            ),*/*/
             Padding(
               padding: const EdgeInsets.only(top: 70, left: 50),
               child: Align(
@@ -151,14 +181,15 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const InsertDataScreen()),
+            MaterialPageRoute(
+                builder: (context) => const InsertDataScreen()),
           );
         },
-        child: const Icon(Icons.add , color: Colors.white,),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
-
     );
   }
 }
-
-
