@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:todo/controller/widgets/circular-container-top-widget.dart';
 import 'package:todo/controller/widgets/log-out-widget.dart';
+import 'package:todo/views/home/insert-data-screen.dart';
 import '../../controller/constants/app-colors/app-colors.dart';
 import '../../controller/constants/app-images/app-images.dart';
 import '../../controller/widgets/back-arrow-widget.dart';
@@ -15,6 +17,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToInsertDataScreen() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+        const InsertDataScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0); // Start from the right
+          const end = Offset.zero; // Move to the center
+          const curve = Curves.easeInOut;
+
+          final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  height: 280,
-                  width: 250,
+                  height: 400,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(18),
-                    color: AppColors.primarycolor.withOpacity(0.4),
+                    color: AppColors.backgroundColor.withOpacity(0.4),
                   ),
                 ),
                 const SizedBox(height: 80),
@@ -51,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const CircularContainerTop(),
             const CircularContainerLeft(),
-            Padding(
+           /* Padding(
               padding: const EdgeInsets.only(top: 730, left: 0),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -68,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Padding(
+            /*Padding(
               padding: const EdgeInsets.only(top: 730, left: 116),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -111,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const LogOutWidget(),
                 ],
               ),
-            ),
+            ),*/*/
             Padding(
               padding: const EdgeInsets.only(top: 70, left: 50),
               child: Align(
@@ -122,6 +146,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.primarycolor,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const InsertDataScreen()),
+          );
+        },
+        child: const Icon(Icons.add , color: Colors.white,),
+      ),
+
     );
   }
 }
+
+
