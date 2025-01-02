@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Navigator.push(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (context) => UpdateDataScreen(
+                                          builder: (context) => UpdateDataScreen(docId:todo.id,
 
                                           ),
                                         ),

@@ -7,6 +7,7 @@ import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/normal-text-widget.dart';
+import 'package:todo/views/home/home-screen.dart';
 
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
@@ -14,14 +15,10 @@ import '../../controller/widgets/text-field-widget.dart';
 
 class UpdateDataScreen extends StatefulWidget {
   final String docId;
-  final String initialTitle;
-  final String initialDescription;
 
   const UpdateDataScreen({
     super.key,
     required this.docId,
-    required this.initialTitle,
-    required this.initialDescription,
   });
 
   @override
@@ -36,12 +33,77 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
   @override
   void initState() {
     super.initState();
-    titleController = TextEditingController(text: widget.initialTitle);
-    descriptionController = TextEditingController(text: widget.initialDescription);
+    titleController = TextEditingController();
+    descriptionController = TextEditingController();
+    fetchData();
+  }
+
+  // Fetch the data based on docId
+  Future<void> fetchData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('todos')
+          .doc(widget.docId)
+          .get();
+
+      if (doc.exists) {
+        titleController.text = doc['title'];
+        descriptionController.text = doc['description'];
+      } else {
+        Get.snackbar(
+          'Error',
+          'Document not found!',
+          icon: const Icon(
+            Icons.error_outline,
+            color: Colors.white,
+          ),
+          titleText: const Text(
+            'Error',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          duration: const Duration(seconds: 5),
+          colorText: Colors.white,
+          backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load data: $e',
+        icon: const Icon(
+          Icons.error_outline,
+          color: Colors.white,
+        ),
+        titleText: const Text(
+          'Error',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+        duration: const Duration(seconds: 5),
+        colorText: Colors.white,
+        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   Future<void> updateData() async {
-    if (titleController.text.trim().isEmpty || descriptionController.text.trim().isEmpty) {
+    if (titleController.text.trim().isEmpty ||
+        descriptionController.text.trim().isEmpty) {
       Get.snackbar(
         'Error',
         'Both fields are required!',
@@ -69,8 +131,10 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
     });
 
     try {
-
-      await FirebaseFirestore.instance.collection('todos').doc(widget.docId).update({
+      await FirebaseFirestore.instance
+          .collection('todos')
+          .doc(widget.docId)
+          .update({
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
       });
@@ -99,7 +163,11 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         backgroundColor: AppColors.primarycolor.withOpacity(0.5),
       );
 
-      Navigator.pop(context); // Navigate back after update
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          )); // Navigate back after update
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -146,27 +214,31 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
                   textColor: const Color(0xff5B5B5B),
                 ),
                 const SizedBox(height: 24),
-                TextFieldWidget(
-                  hintText: 'Enter Title',
-                  controller: titleController,
-                ),
-                TextFieldWidget(
-                  hintText: 'Enter Description',
-                  controller: descriptionController,
-                ),
-                const SizedBox(height: 40),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: const Duration(seconds: 3),
+                  duration: Duration(seconds: 3),
                   color: AppColors.primarycolor,
                 )
-                    : ButtonWidget(
-                  text: 'Update Data',
-                  ontap: () async {
-                    await updateData();
-                  },
+                    : Column(
+                  children: [
+                    TextFieldWidget(
+                      hintText: 'Enter Title',
+                      controller: titleController,
+                    ),
+                    TextFieldWidget(
+                      hintText: 'Enter Description',
+                      controller: descriptionController,
+                    ),
+                    const SizedBox(height: 40),
+                    ButtonWidget(
+                      text: 'Update Data',
+                      ontap: () async {
+                        await updateData();
+                      },
+                    ),
+                    const SizedBox(height: 14),
+                  ],
                 ),
-                const SizedBox(height: 14),
               ],
             ),
           ],
