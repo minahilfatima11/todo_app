@@ -143,6 +143,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         isLoading = false;
       });
 
+      // Show success Snackbar
       Get.snackbar(
         'Success',
         'Your data is successfully updated!',
@@ -163,11 +164,16 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         backgroundColor: AppColors.primarycolor.withOpacity(0.5),
       );
 
-      Navigator.pushReplacement(
+      // Navigate to HomeScreen after the Snackbar
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
+         CupertinoPageRoute(
             builder: (context) => HomeScreen(),
-          )); // Navigate back after update
+          ),
+        );
+      });
+
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -216,7 +222,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
                 const SizedBox(height: 24),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: Duration(seconds: 3),
+                  duration: const Duration(seconds: 3),
                   color: AppColors.primarycolor,
                 )
                     : Column(
