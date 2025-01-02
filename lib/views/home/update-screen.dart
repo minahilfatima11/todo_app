@@ -71,7 +71,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
           ),
           duration: const Duration(seconds: 5),
           colorText: Colors.white,
-          backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+          backgroundColor: Colors.red.withOpacity(0.5),
         );
       }
     } catch (e) {
@@ -92,7 +92,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.5),
       );
     } finally {
       setState(() {
@@ -121,7 +121,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.5),
       );
       return;
     }
@@ -159,21 +159,20 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
             fontSize: 20,
           ),
         ),
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 3),
         colorText: Colors.white,
         backgroundColor: Colors.green.withOpacity(0.5),
       );
 
       // Navigate to HomeScreen after the Snackbar
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 5), () {
         Navigator.pushReplacement(
           context,
-         CupertinoPageRoute(
+          CupertinoPageRoute(
             builder: (context) => HomeScreen(),
           ),
         );
       });
-
     } catch (e) {
       setState(() {
         isLoading = false;
@@ -194,9 +193,9 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
             fontSize: 20,
           ),
         ),
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 3),
         colorText: Colors.white,
-        backgroundColor: Colors.red.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.3),
       );
     }
   }
@@ -213,10 +212,10 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
             Column(
               children: [
                 const SizedBox(height: 160),
-                BlackTextHeading(text: 'Update Task'),
+                BlackTextHeading(text: 'Update TODO'),
                 const SizedBox(height: 20),
                 NormalTextWidget(
-                  text: 'Modify the details below to update the task.',
+                  text: 'Modify the details below to update the todo.',
                   textColor: const Color(0xff5B5B5B),
                 ),
                 const SizedBox(height: 24),
