@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:todo/controller/widgets/circular-container-top-widget.dart';
 import 'package:todo/controller/widgets/log-out-widget.dart';
 import 'package:todo/views/home/insert-data-screen.dart';
+import 'package:todo/views/home/update-screen.dart';
 import '../../controller/constants/app-colors/app-colors.dart';
 import '../../controller/constants/app-images/app-images.dart';
 import '../../controller/widgets/back-arrow-widget.dart';
@@ -24,8 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
         pageBuilder: (context, animation, secondaryAnimation) =>
         const InsertDataScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0); // Start from the right
-          const end = Offset.zero; // Move to the center
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
           const curve = Curves.easeInOut;
 
           final tween =
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
-                        .collection('todos') // Replace with your collection name
+                        .collection('todos')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState ==
@@ -117,7 +118,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   // Edit Icon
                                   GestureDetector(
                                     onTap: () {
-                                      // Handle Edit functionality
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) => UpdateDataScreen(
+
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
@@ -131,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
+
                                   const SizedBox(width: 8),
                                   // Delete Icon
                                   GestureDetector(

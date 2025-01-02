@@ -7,10 +7,7 @@ import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/normal-text-widget.dart';
-import 'package:todo/views/home/home-screen.dart';
 
-import '../../controller/constants/app-images/app-images.dart';
-import '../../controller/widgets/back-arrow-widget.dart';
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
 import '../../controller/widgets/text-field-widget.dart';
@@ -59,7 +56,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
       await FirebaseFirestore.instance.collection('todos').add({
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
-        'createdAt': DateTime.now(),
+        'docId': DateTime.now().microsecondsSinceEpoch.toString(),
       });
 
       setState(() {
