@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:todo/controller/widgets/circular-container-top-widget.dart';
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
-                        .collection('todos')
+                        .collection(FirebaseAuth.instance.currentUser!.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState ==

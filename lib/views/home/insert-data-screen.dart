@@ -56,6 +56,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
         'docId': DateTime.now().microsecondsSinceEpoch.toString(),
+
       });
 
       setState(() {
