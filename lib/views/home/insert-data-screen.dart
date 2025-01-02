@@ -63,6 +63,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         isLoading = false;
       });
 
+      // Show success snackbar first
       Get.snackbar(
         'Success',
         'Your data is successfully added!',
@@ -78,11 +79,15 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
             fontSize: 20,
           ),
         ),
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 3), // Adjust duration as needed
         colorText: Colors.white,
         backgroundColor: AppColors.primarycolor.withOpacity(0.5),
       );
 
+      // Add a delay before navigating to the home screen
+      await Future.delayed(const Duration(seconds: 3));
+
+      // Navigate to the home screen
       Navigator.pop(context);
     } catch (e) {
       setState(() {
