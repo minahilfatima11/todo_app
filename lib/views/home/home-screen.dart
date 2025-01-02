@@ -46,10 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
+
         child: Stack(
           children: [
+
             Column(
+
               children: [
+
                 Container(
                   height: 300,
                   width: double.infinity,
@@ -175,6 +179,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const CircularContainerTop(),
             const CircularContainerLeft(),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:
+              [
+
+                BackArrowWidget(),
+                LogOutWidget(),
+              ],),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 70, left: 50),
               child: Align(

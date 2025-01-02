@@ -161,7 +161,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.green.withOpacity(0.5),
       );
 
       // Navigate to HomeScreen after the Snackbar
@@ -196,7 +196,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.5),
       );
     }
   }
@@ -222,7 +222,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
                 const SizedBox(height: 24),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: const Duration(seconds: 3),
+                  duration: const Duration(seconds: 2),
                   color: AppColors.primarycolor,
                 )
                     : Column(

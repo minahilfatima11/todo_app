@@ -16,7 +16,7 @@ class LogOutWidget extends StatelessWidget {
      child: IconButton(onPressed: ()async{
        await FirebaseAuth.instance.signOut();
        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context)=>SignupScreen()));
-     }, icon: Icon(Icons.logout)));
+     }, icon: Icon(Icons.logout, size: 26, color: Colors.white,)));
 
   }
 }

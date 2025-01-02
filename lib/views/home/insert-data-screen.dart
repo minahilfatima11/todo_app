@@ -7,7 +7,6 @@ import 'package:todo/controller/constants/app-colors/app-colors.dart';
 import 'package:todo/controller/widgets/blacktext-heading-widget.dart';
 import 'package:todo/controller/widgets/button-widget.dart';
 import 'package:todo/controller/widgets/normal-text-widget.dart';
-
 import '../../controller/widgets/circular-container-left-widget.dart';
 import '../../controller/widgets/circular-container-top-widget.dart';
 import '../../controller/widgets/text-field-widget.dart';
@@ -20,8 +19,8 @@ class InsertDataScreen extends StatefulWidget {
 }
 
 class _InsertDataScreenState extends State<InsertDataScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   bool isLoading = false;
 
   Future<void> insertData() async {
@@ -43,7 +42,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.5), // Red background with opacity
       );
       return;
     }
@@ -63,7 +62,6 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         isLoading = false;
       });
 
-      // Show success snackbar first
       Get.snackbar(
         'Success',
         'Your data is successfully added!',
@@ -79,15 +77,12 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
             fontSize: 20,
           ),
         ),
-        duration: const Duration(seconds: 3), // Adjust duration as needed
+        duration: const Duration(seconds: 3),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.green.withOpacity(0.5), // Green background with opacity
       );
 
-      // Add a delay before navigating to the home screen
-      await Future.delayed(const Duration(seconds: 3));
-
-      // Navigate to the home screen
+      await Future.delayed(const Duration(seconds: 4));
       Navigator.pop(context);
     } catch (e) {
       setState(() {
@@ -96,7 +91,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
 
       Get.snackbar(
         'Error',
-        e.toString(),
+        'Failed to add data: $e',
         icon: const Icon(
           Icons.error_outline,
           color: Colors.white,
@@ -111,7 +106,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: AppColors.primarycolor.withOpacity(0.5),
+        backgroundColor: Colors.red.withOpacity(0.3), // Red background with opacity
       );
     }
   }
@@ -125,7 +120,6 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
           children: [
             CircularContainerTop(),
             CircularContainerLeft(),
-
             Column(
               children: [
                 const SizedBox(height: 160),
@@ -133,7 +127,7 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
                 const SizedBox(height: 20),
                 NormalTextWidget(
                   text: 'Fill the details below to add a task.',
-                  textColor: Color(0xff5B5B5B),
+                  textColor: const Color(0xff5B5B5B),
                 ),
                 const SizedBox(height: 24),
                 TextFieldWidget(
