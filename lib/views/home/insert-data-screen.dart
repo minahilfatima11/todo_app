@@ -123,10 +123,10 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
             Column(
               children: [
                 const SizedBox(height: 160),
-                BlackTextHeading(text: 'Add a New Task'),
+                BlackTextHeading(text: 'Add a New TODO'),
                 const SizedBox(height: 20),
                 NormalTextWidget(
-                  text: 'Fill the details below to add a task.',
+                  text: 'Fill the details below to add a todo.',
                   textColor: const Color(0xff5B5B5B),
                 ),
                 const SizedBox(height: 24),
