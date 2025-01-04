@@ -46,7 +46,7 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
 
     try {
       DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection('todos')
+          .collection('Todos')
           .doc(widget.docId)
           .get();
 
@@ -132,11 +132,12 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
 
     try {
       await FirebaseFirestore.instance
-          .collection('todos')
+          .collection('Todos')
           .doc(widget.docId)
           .update({
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
+        'updatedAt': DateTime.now().toLocal(),
       });
 
       setState(() {
@@ -221,29 +222,29 @@ class _UpdateDataScreenState extends State<UpdateDataScreen> {
                 const SizedBox(height: 24),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: const Duration(seconds: 2),
-                  color: AppColors.primarycolor,
-                )
+                        duration: const Duration(seconds: 2),
+                        color: AppColors.primarycolor,
+                      )
                     : Column(
-                  children: [
-                    TextFieldWidget(
-                      hintText: 'Enter Title',
-                      controller: titleController,
-                    ),
-                    TextFieldWidget(
-                      hintText: 'Enter Description',
-                      controller: descriptionController,
-                    ),
-                    const SizedBox(height: 40),
-                    ButtonWidget(
-                      text: 'Update Data',
-                      ontap: () async {
-                        await updateData();
-                      },
-                    ),
-                    const SizedBox(height: 14),
-                  ],
-                ),
+                        children: [
+                          TextFieldWidget(
+                            hintText: 'Enter Title',
+                            controller: titleController,
+                          ),
+                          TextFieldWidget(
+                            hintText: 'Enter Description',
+                            controller: descriptionController,
+                          ),
+                          const SizedBox(height: 40),
+                          ButtonWidget(
+                            text: 'Update Data',
+                            ontap: () async {
+                              await updateData();
+                            },
+                          ),
+                          const SizedBox(height: 14),
+                        ],
+                      ),
               ],
             ),
           ],

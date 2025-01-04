@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,9 +25,18 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   bool isLoading = false;
+  String generateRandomString(int length) {
+    const String chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    Random random = Random();
+
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
+  }
 
   Future<void> insertData() async {
-    if (titleController.text.trim().isEmpty || descriptionController.text.trim().isEmpty) {
+    if (titleController.text.trim().isEmpty ||
+        descriptionController.text.trim().isEmpty) {
       Get.snackbar(
         'Error',
         'Both fields are required!',
@@ -43,7 +54,8 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: Colors.red.withOpacity(0.5), // Red background with opacity
+        backgroundColor:
+            Colors.red.withOpacity(0.5), // Red background with opacity
       );
       return;
     }
@@ -53,18 +65,17 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
     });
 
     try {
-
       User? currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser == null) throw Exception('User not logged in');
 
       String userId = currentUser.uid;
-      String docId = DateTime.now().microsecondsSinceEpoch.toString();
-
-
-      await FirebaseFirestore.instance.collection(userId).doc(docId).set({
+      String docId = generateRandomString(28);
+      await FirebaseFirestore.instance.collection("Todos").doc(docId).set({
+        "id": docId,
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
-        'docId': docId,
+        'createdAt': DateTime.now().toLocal(),
+        'updatedAt': DateTime.now().toLocal(),
         'userId': userId,
       });
 
@@ -89,7 +100,8 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         ),
         duration: const Duration(seconds: 3),
         colorText: Colors.white,
-        backgroundColor: Colors.green.withOpacity(0.5), // Green background with opacity
+        backgroundColor:
+            Colors.green.withOpacity(0.5), // Green background with opacity
       );
 
       await Future.delayed(const Duration(seconds: 4));
@@ -116,7 +128,8 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
         ),
         duration: const Duration(seconds: 5),
         colorText: Colors.white,
-        backgroundColor: Colors.red.withOpacity(0.3), // Red background with opacity
+        backgroundColor:
+            Colors.red.withOpacity(0.3), // Red background with opacity
       );
     }
   }
@@ -151,15 +164,15 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
                 const SizedBox(height: 40),
                 isLoading
                     ? SpinKitWaveSpinner(
-                  duration: const Duration(seconds: 3),
-                  color: AppColors.primarycolor,
-                )
+                        duration: const Duration(seconds: 3),
+                        color: AppColors.primarycolor,
+                      )
                     : ButtonWidget(
-                  text: 'Insert Data',
-                  ontap: () async {
-                    await insertData();
-                  },
-                ),
+                        text: 'Insert Data',
+                        ontap: () async {
+                          await insertData();
+                        },
+                      ),
                 const SizedBox(height: 14),
               ],
             ),
