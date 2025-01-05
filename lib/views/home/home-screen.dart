@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: AppColors.primarycolor,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 0),
                 Container(
                   height: 400,
                   width: double.infinity,
