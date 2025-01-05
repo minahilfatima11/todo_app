@@ -189,11 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
             const CircularContainerTop(),
             const CircularContainerLeft(),
             Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(14.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  BackArrowWidget(),
+
                   LogOutWidget(),
                 ],
               ),

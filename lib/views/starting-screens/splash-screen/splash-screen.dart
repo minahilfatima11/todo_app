@@ -22,27 +22,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-    isloggedin() async {
-    await Future.delayed(const Duration(seconds: 3));
+  isloggedin() {
     User? check = FirebaseAuth.instance.currentUser;
 
     if (check == null) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  SignupScreen()),
+        MaterialPageRoute(builder: (context) => SignupScreen()),
       );
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  HomeScreen()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    isloggedin();
   }
 
   @override
@@ -68,7 +61,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 const SizedBox(height: 30),
                 ButtonWidget(
                   text: 'Get Started',
-                  ontap: () {},
+                  ontap: () {
+                    isloggedin();
+                  },
                 ),
               ],
             ),
