@@ -72,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'TODO LIST..!',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    backgroundColor: AppColors.backgroundColor.withOpacity(0.4),
                     fontSize: 26,
                     color: AppColors.primarycolor,
                   ),
@@ -156,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     GestureDetector(
                                       onTap: () {
                                         FirebaseFirestore.instance
-                                            .collection('todos')
+                                            .collection('Todos')
                                             .doc(todo.id)
                                             .delete();
                                       },
