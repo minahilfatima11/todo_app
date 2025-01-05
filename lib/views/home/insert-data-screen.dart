@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -52,11 +53,19 @@ class _InsertDataScreenState extends State<InsertDataScreen> {
     });
 
     try {
-      await FirebaseFirestore.instance.collection('todos').add({
+
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser == null) throw Exception('User not logged in');
+
+      String userId = currentUser.uid;
+      String docId = DateTime.now().microsecondsSinceEpoch.toString();
+
+
+      await FirebaseFirestore.instance.collection(userId).doc(docId).set({
         'title': titleController.text.trim(),
         'description': descriptionController.text.trim(),
-        'docId': DateTime.now().microsecondsSinceEpoch.toString(),
-
+        'docId': docId,
+        'userId': userId,
       });
 
       setState(() {
